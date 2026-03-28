@@ -1,0 +1,316 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<!-- MOBILE FIX -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- THEME COLOR (IMPORTANT) -->
+<meta name="theme-color" content="#0c4a6e">
+
+<title>Happy Birthday 💖</title>
+
+<style>
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: #0c4a6e; /* fallback */
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #0284c7, #1e40af, #0c4a6e);
+    color: white;
+    text-align: center;
+    overflow: hidden;
+}
+
+/* SCREEN */
+.screen {
+    position: fixed;
+    width: 100%;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+}
+
+.hidden { display: none; }
+
+/* CARD */
+.card {
+    width: 100%;
+    max-width: 500px;
+    background: rgba(0,0,0,0.45);
+    padding: 18px;
+    border-radius: 18px;
+    backdrop-filter: blur(12px);
+    max-height: 65dvh;
+    overflow-y: auto;
+    line-height: 1.6;
+}
+
+/* BUTTON */
+button {
+    margin-top: 12px;
+    padding: 14px;
+    width: 100%;
+    max-width: 300px;
+    border-radius: 14px;
+    border: none;
+    background: #ff4da6;
+    color: white;
+    font-size: 16px;
+}
+
+/* GIFT */
+.gift {
+    font-size: 70px;
+    animation: bounce 1.5s infinite;
+    cursor: pointer;
+}
+@keyframes bounce {
+    50% { transform: translateY(-12px); }
+}
+
+/* IMAGE */
+img {
+    width: 100px;
+    margin-bottom: 10px;
+}
+
+/* CONFETTI */
+.confetti {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    top: -10px;
+    animation: fall linear infinite;
+}
+@keyframes fall {
+    to { transform: translateY(110vh) rotate(360deg); }
+}
+
+/* NEW ANIMATIONS */
+.sparkle {
+    position: fixed;
+    animation: sparkleMove 4s linear infinite;
+}
+@keyframes sparkleMove {
+    to { transform: translateY(-100vh); opacity: 0; }
+}
+
+.bubble {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.3);
+    animation: bubbleUp 6s linear infinite;
+}
+@keyframes bubbleUp {
+    to { transform: translateY(-110vh); opacity: 0; }
+}
+
+.balloon {
+    position: fixed;
+    animation: balloonUp 7s linear infinite;
+}
+@keyframes balloonUp {
+    to { transform: translateY(-120vh); opacity: 0; }
+}
+
+/* TYPING */
+.cursor {
+    display: inline-block;
+    width: 5px;
+    background: white;
+    margin-left: 3px;
+    animation: blink 1s infinite;
+}
+@keyframes blink {
+    50% { opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="screen" id="start">
+    <h2>🎁 Someone has a surprise for you…</h2>
+    <div class="gift" onclick="openGift()">🎁</div>
+    <p>Tap the gift 💖</p>
+</div>
+
+<div class="screen hidden" id="main">
+    <div class="card">
+        <img id="img" src="">
+        <div id="text"></div>
+    </div>
+    <button onclick="next()">Next 💖</button>
+</div>
+
+<script>
+
+// CONFETTI
+function confettiBurst() {
+    for (let i = 0; i < 120; i++) {
+        let c = document.createElement("div");
+        c.className = "confetti";
+        c.style.left = Math.random()*100 + "vw";
+        c.style.animationDuration = (Math.random()*3+2)+"s";
+        c.style.backgroundColor = ["#ff4da6","#ffd700","#00ffff","#ff6b6b"][Math.floor(Math.random()*4)];
+        document.body.appendChild(c);
+    }
+}
+
+// NEW ANIMATIONS
+setInterval(()=>{
+    let s=document.createElement("div");
+    s.className="sparkle";
+    s.innerHTML="✨";
+    s.style.left=Math.random()*100+"vw";
+    document.body.appendChild(s);
+    setTimeout(()=>s.remove(),4000);
+},500);
+
+setInterval(()=>{
+    let b=document.createElement("div");
+    b.className="bubble";
+    b.style.left=Math.random()*100+"vw";
+    document.body.appendChild(b);
+    setTimeout(()=>b.remove(),6000);
+},700);
+
+setInterval(()=>{
+    let bl=document.createElement("div");
+    bl.className="balloon";
+    bl.innerHTML="🎈";
+    bl.style.left=Math.random()*100+"vw";
+    document.body.appendChild(bl);
+    setTimeout(()=>bl.remove(),7000);
+},900);
+
+// OPEN
+function openGift(){
+    document.getElementById("start").classList.add("hidden");
+    document.getElementById("main").classList.remove("hidden");
+    confettiBurst();
+    typeText(parts[0]);
+}
+
+// IMAGES
+const images=[
+"https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif",
+"https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif",
+"https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif",
+"https://media.giphy.com/media/ICOgUNjpvO0PC/giphy.gif"
+];
+
+// ✅ FULL TEXT (KEEP ADDING YOUR REMAINING PARTS SAME WAY)
+const parts=[
+`💌 Part 1<br><br>Pehle toh happy birthday pyaare... 🎉<br>May God bless your life with everlasting happiness, stay happy and healthy always...<br>Bhagwan kare aapki har ek khwahish poori ho... ✨<br>Aur first of all, meri zindagi ka sabse accha faisla tha aapko chunna... 💖`,
+
+`💌 Part 2<br><br>Bhagwan kare ki main aapke har ek zakham ki dawai ban paun...<br>Har ek dukh mein saath de paun...<br>Har ek pareshani ko bhula paun... 🫶`,
+
+`💌 Part 3<br><br>Aapke har ek dard mere hisse aaye...<br>Aap hamesha khush raho 💫`,
+
+`💌 Part 4<br><br>You deserve everything in the world 🌍💖<br>Aap bahut matter karte ho mere liye...`,
+
+`💌 Part 5<br><br>Love you Akash bhaiyaaaaaaaaaaaaa 💖`,
+
+`💌 Part 6<br><br>Do saal ka friendship?? usse bhi bada 💖`,
+
+`💌 Part 7<br><br>I’m blessed to have you 💖`,
+
+`💌 Part 8<br><br>Khana time se khana 😤`,
+
+`💌 Part 9<br><br>Aapne sab kuch kiya 💖`,
+
+`💌 Part 10<br><br>YOU ARE MY PRIORITY 💖`,
+
+`💌 Part 11<br><br>You are special 💖`,
+
+`💌 Part 12<br><br>Ek stranger ko itna kaun deta hai?? 🥺`,
+
+`💌 Part 13<br><br>Aap dukhi ho toh mera din kharab`,
+
+`💌 Part 14<br><br>Meri family mein aap bhi ho 💖`,
+
+`💌 Part 15<br><br>Sab chhod gaye… par aap ruk gaye 🫂`,
+
+`💌 Part 16<br><br>Mujhe aapki har ek cheez pasand hai 😹💖`,
+
+`💌 Part 17<br><br>I’ll stay with you 🤞💖`,
+
+`💌 Part 18<br><br>Aap mere sab kuch ho 💖`,
+
+`💌 Part 19<br><br>Aapki behen hamesha saath rahegi 🫂`,
+
+`💌 Part 20<br><br>Prince treatment milega 😏👑`,
+
+`💌 Part 21<br><br>Woh khaas insaan… aap ho 💖`,
+
+`💌 Part 22<br><br>Love you so much 💖`,
+
+`💌 Part 23<br><br>Ek baar milna hai 🫂`,
+
+`💌 Part 24<br><br>I want to be your safe place 💖`,
+
+`💌 Part 25<br><br>Teesra saal bhi saath?? 😏`,
+
+`💌 Part 26<br><br>Pehli mulaqat yaad hai 😹`,
+
+`💌 Part 27<br><br>Tab se sab badal gaya 💖`,
+
+`💌 Part 28<br><br>Har baat share hoti thi 🫂`,
+
+`💌 Part 29<br><br>In yaadon mein zindagi 💖`,
+
+`💌 Part 30<br><br>Happy Birthday mere pyaare 💞🫂`
+];
+
+let i=0;
+
+// TYPING FIX
+function typeText(text){
+    let el=document.getElementById("text");
+    el.innerHTML="";
+    let idx=0;
+
+    function type(){
+        if(idx<text.length){
+            if(text.substring(idx,idx+4)==="<br>"){
+                el.innerHTML+="<br>";
+                idx+=4;
+            } else {
+                el.innerHTML+=text.charAt(idx);
+                idx++;
+            }
+            setTimeout(type,12);
+        } else {
+            el.innerHTML+='<span class="cursor"></span>';
+        }
+    }
+    type();
+}
+
+// NEXT
+function next(){
+    i++;
+    if(i>=parts.length) return;
+    document.getElementById("img").src=images[i%images.length];
+    typeText(parts[i]);
+}
+
+// INIT
+document.getElementById("img").src=images[0];
+
+</script>
+
+</body>
+</html>
